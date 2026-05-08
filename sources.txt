@@ -1,0 +1,2 @@
+./assignments/character/Character.java
+./tests/CharacterTest.java
