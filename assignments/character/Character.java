@@ -1,56 +1,84 @@
 public class Character {
+    private final String name;
+    private int hp;
+    private int maxHp;
+    private int mp;
+    private int maxMp;
+    private int gold;
 
-    // TODO: private талбаруудыг зарлана уу
-    // - name (String)           → Баатрын нэр. (Bonus: final болгож болно)
-    // - hp (int, default 100)   → Одоогийн HP
-    // - maxHp (int, default 100)→ Дээд HP
-    // - mp (int, default 50)    → Одоогийн MP
-    // - maxMp (int, default 50) → Дээд MP
-    // - gold (int, default 0)   → Алт
+    public Character(String name) {
+        this.name = name;
+        this.hp = 100;
+        this.maxHp = 100;
+        this.mp = 50;
+        this.maxMp = 50;
+        this.gold = 0;
+    }
 
-    // TODO: Constructor бичнэ үү
-    // public Character(String name)
-    // - name талбарт параметрын утгыг өгнө
-    // - Бусад талбар default утгаар үлдэнэ
+    public String getName() {
+        return name;
+    }
 
-    // TODO: getName() → String
-    // - name талбарыг буцаана
+    public int getHp() {
+        return hp;
+    }
 
-    // TODO: getHp() → int
+    public int getMaxHp() {
+        return maxHp;
+    }
 
-    // TODO: getMaxHp() → int
+    public int getMp() {
+        return mp;
+    }
 
-    // TODO: getMp() → int
+    public int getMaxMp() {
+        return maxMp;
+    }
 
-    // TODO: getMaxMp() → int
+    public int getGold() {
+        return gold;
+    }
 
-    // TODO: getGold() → int
+    public void takeDamage(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Damage cannot be negative");
+        }
+        hp = Math.max(0, hp - amount);
+    }
 
-    // TODO: takeDamage(int amount) → void
-    // - hp-аас amount хасна
-    // - hp 0-ээс доош яваагүй байх: Math.max(0, hp - amount)
-    // - amount < 0 бол: юу ч өөрчлөхгүй (Bonus: IllegalArgumentException шидэх)
+    public void heal(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Healing cannot be negative");
+        }
+        hp = Math.min(maxHp, hp + amount);
+    }
 
-    // TODO: heal(int amount) → void
-    // - hp-д amount нэмнэ
-    // - maxHp-аас хэтрэхгүй: Math.min(maxHp, hp + amount)
-    // - amount < 0 бол: юу ч өөрчлөхгүй (Bonus: IllegalArgumentException)
+    public void earnGold(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Gold cannot be negative");
+        }
+        gold += amount;
+    }
 
-    // TODO: earnGold(int amount) → void
-    // - gold-д amount нэмнэ
-    // - amount < 0 бол: юу ч өөрчлөхгүй (Bonus: IllegalArgumentException)
+    public boolean spendGold(int amount) {
+        if (amount < 0) {
+            return false;
+        }
+        if (gold >= amount) {
+            gold -= amount;
+            return true;
+        }
+        return false;
+    }
 
-    // ─────── 🟡 Stretch (30 оноо) ───────
+    public boolean isAlive() {
+        return hp > 0;
+    }
 
-    // TODO: spendGold(int amount) → boolean
-    // - gold >= amount бол: gold -= amount хийгээд true буцаана
-    // - gold < amount бол: юу ч өөрчлөхгүй, false буцаана
-
-    // TODO: isAlive() → boolean
-    // - hp > 0 бол true, эс бөгөөс false
-
-    // TODO: @Override toString() → String
-    // - Формат: "⚔️ [name] [HP: hp/maxHp, MP: mp/maxMp, Gold: gold]"
-    // - Жишээ: "⚔️ Aragorn [HP: 100/100, MP: 50/50, Gold: 0]"
-
+    @Override
+    public String toString() {
+        return String.format("⚔️ %s [HP: %d/%d, MP: %d/%d, Gold: %d]", 
+            name, hp, maxHp, mp, maxMp, gold);
+    }
 }
+
