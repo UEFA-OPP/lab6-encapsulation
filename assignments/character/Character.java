@@ -1,25 +1,21 @@
-
-
+/**
+        * Lab 6: Character Sheet - Encapsulation
+ */
 public class Character {
-    // 🔴 Bonus: name талбарыг final болгох
+    // Bonus: name талбар final байх ёстой
     private final String name;
-    private int hp;
-    private int maxHp;
-    private int mp;
-    private int maxMp;
-    private int gold;
+    private int hp = 100;
+    private int maxHp = 100;
+    private int mp = 50;
+    private int maxMp = 50;
+    private int gold = 0;
 
-    // 🏗️ Constructor
+    // Core: Нэг String параметр авдаг constructor
     public Character(String name) {
         this.name = name;
-        this.hp = 100;
-        this.maxHp = 100;
-        this.mp = 50;
-        this.maxMp = 50;
-        this.gold = 0;
     }
 
-    // 🟢 Core: Getters
+    // Core: Getter-үүд (Тест файл эдгээр нэрээр дуудаж байгаа)
     public String getName() { return name; }
     public int getHp() { return hp; }
     public int getMaxHp() { return maxHp; }
@@ -27,47 +23,47 @@ public class Character {
     public int getMaxMp() { return maxMp; }
     public int getGold() { return gold; }
 
-    // 🟢 Core: Methods
+    // Core: takeDamage (Bonus: Сөрөг утганд IllegalArgumentException шиднэ)
     public void takeDamage(int amount) {
         if (amount < 0) {
-            // 🔴 Bonus: Exception шидэх
-            throw new IllegalArgumentException("Damage must be non-negative");
+            throw new IllegalArgumentException("Damage amount cannot be negative");
         }
         this.hp = Math.max(0, this.hp - amount);
     }
 
+    // Core: heal (maxHp-аас хэтрүүлж болохгүй)
     public void heal(int amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("Heal amount must be non-negative");
+            throw new IllegalArgumentException("Heal amount cannot be negative");
         }
-        this.hp = Math.min(maxHp, this.hp + amount);
+        this.hp = Math.min(this.maxHp, this.hp + amount);
     }
 
+    // Core: earnGold (Сөрөг утгыг үл тоомсорлоно)
     public void earnGold(int amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("Gold amount must be non-negative");
+            return;
         }
         this.gold += amount;
     }
 
-    // 🟡 Stretch: Methods
+    // Stretch: spendGold
     public boolean spendGold(int amount) {
-        if (amount < 0) return false;
-        if (this.gold >= amount) {
+        if (amount >= 0 && this.gold >= amount) {
             this.gold -= amount;
             return true;
         }
         return false;
     }
 
+    // Stretch: isAlive
     public boolean isAlive() {
         return this.hp > 0;
     }
 
-    // 🟡 Stretch: toString Override
+    // Stretch: toString (Тест файлын хүлээж буй яг тэр формат)
     @Override
     public String toString() {
-        // Формат: ⚔️ [name] [HP: hp/maxHp, MP: mp/maxMp, Gold: gold]
         return String.format("⚔️ %s [HP: %d/%d, MP: %d/%d, Gold: %d]",
                 name, hp, maxHp, mp, maxMp, gold);
     }
