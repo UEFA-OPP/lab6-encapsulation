@@ -233,3 +233,5 @@ bash scripts/run_tests.sh --tag bonus
 5. **`toString` формат буруу** — emoji, space, хаалт бүх зүйл яг таарах ёстой
 6. **Constructor-д validation хэтрүүлэх** — spec дээр байхгүй бол битгий нэм
 7. **Tests өөрчлөх** — `tests/` хавтсыг хөндөхгүй, тэгвэл PR бүтэлгүйтнэ
+
+echo "Lab 6: Encapsulation completed by [Чиний нэр]" >> README.md
