@@ -1,30 +1,30 @@
-# Compiled class files
-*.class
-
-# Build directories
-build/
+### IntelliJ IDEA ###
 out/
-target/
-bin/
+!**/src/main/**/out/
+!**/src/test/**/out/
+.kotlin
 
-# JUnit / downloaded jars
-lib/
-*.jar
-
-# IDE files
-.idea/
-*.iml
-.vscode/
-.settings/
-.project
+### Eclipse ###
+.apt_generated
 .classpath
-*.swp
-*.swo
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
-# OS files
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
 .DS_Store
-Thumbs.db
-
-# Temporary files
-*.tmp
-*.log
